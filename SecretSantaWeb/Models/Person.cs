@@ -1,4 +1,9 @@
-﻿namespace SecretSantaWeb.Models
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace SecretSantaWeb.Models
 {
     public class Person
     {
@@ -8,6 +13,9 @@
 
         public int FamilyID { get; set; }
         public virtual Family Family { get; set; }
+
+        public virtual List<Person> DontBuyForList { get; set; }
+        
 
     }
 }
