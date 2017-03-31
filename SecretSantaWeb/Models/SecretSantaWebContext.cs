@@ -22,5 +22,7 @@ namespace SecretSantaWeb.Models
         public System.Data.Entity.DbSet<SecretSantaWeb.Models.Family> Families { get; set; }
 
         public System.Data.Entity.DbSet<SecretSantaWeb.Models.Person> People { get; set; }
+
+        public System.Data.Entity.DbSet<SecretSantaWeb.Models.Exclusion> Exclusions { get; set; }
     }
 }
