@@ -4,10 +4,9 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Person Details</h2>
 
 <div>
-    <h4>Person</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -15,7 +14,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Family.FamilyName)
+            @Html.ActionLink(Model.Family.FamilyName, "Details", "Families", new { id = Model.FamilyID },null)
         </dd>
 
         <dt>
@@ -25,7 +24,19 @@
         <dd>
             @Html.DisplayFor(model => model.Name)
         </dd>
+        <dt>
+            Not buying for
+        </dt>
+        <dd></dd>
 
+        @foreach (var item in Model.Exclusions)
+        {
+            <dt></dt>
+            <dd>
+               
+                @Html.ActionLink(item.NotBuyingFor.Name, "Details", "Exclusions", new { id = item.ExclusionID }, null)
+            </dd>
+        }
     </dl>
 </div>
 <p>

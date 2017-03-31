@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Exclusions Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,22 +12,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ExclusionID)
+            @Html.DisplayNameFor(model => model.Owner)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Owner.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NotBuyingFor.Name)
+            @Html.DisplayNameFor(model => model.NotBuyingFor)
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExclusionID)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Owner.Name)
         </td>

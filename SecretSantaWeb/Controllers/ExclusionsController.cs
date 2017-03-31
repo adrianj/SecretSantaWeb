@@ -52,11 +52,20 @@ namespace SecretSantaWeb.Controllers
         {
             if (ModelState.IsValid)
             {
+                exclusion.NotBuyingFor = db.People.Find(exclusion.NotBuyingForID);
+                exclusion.Owner = db.People.Find(exclusion.OwnerID);
+                if(exclusion.Owner == null)
+                {
+                    return HttpNotFound();
+                }
+                exclusion.Owner.Exclusions.Add(exclusion);
                 db.Exclusions.Add(exclusion);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
+            ViewBag.OwnerID = new SelectList(db.People, "PersonID", "Name", exclusion.OwnerID);
+            ViewBag.NotBuyingForID = new SelectList(db.People, "PersonID", "Name", exclusion.NotBuyingForID);
             return View(exclusion);
         }
 
@@ -72,6 +81,8 @@ namespace SecretSantaWeb.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.OwnerID = new SelectList(db.People, "PersonID", "Name", exclusion.OwnerID);
+            ViewBag.NotBuyingForID = new SelectList(db.People, "PersonID", "Name", exclusion.NotBuyingForID);
             return View(exclusion);
         }
 
@@ -88,6 +99,8 @@ namespace SecretSantaWeb.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.OwnerID = new SelectList(db.People, "PersonID", "Name", exclusion.OwnerID);
+            ViewBag.NotBuyingForID = new SelectList(db.People, "PersonID", "Name", exclusion.NotBuyingForID);
             return View(exclusion);
         }
 
