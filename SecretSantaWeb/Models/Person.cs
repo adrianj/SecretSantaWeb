@@ -13,8 +13,8 @@ namespace SecretSantaWeb.Models
 
         public int FamilyID { get; set; }
         public virtual Family Family { get; set; }
-
-        public virtual List<Person> DontBuyForList { get; set; }
+        
+        public virtual List<Exclusion> Exclusions { get; set; }
         
 
     }

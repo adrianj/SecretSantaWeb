@@ -12,5 +12,7 @@ namespace SecretSantaWeb.Models
 
         public virtual List<Person> FamilyMembers { get; set; }
 
+        public virtual List<Mapping> Mappings { get; set; }
+
     }
 }
