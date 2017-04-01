@@ -12,10 +12,11 @@ namespace SecretSantaWeb.Models
         public int FamilyID { get; set; }
         public virtual Family Family { get; set; }
 
+        public int GiverID { get; set; }
+        public virtual Person Giver { get; set; }
+
         public int ReceiverID { get; set; }
         public virtual Person Receiver { get; set; }
 
-        public int GiverID { get; set; }
-        public virtual Person Giver { get; set; }
     }
 }

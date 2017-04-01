@@ -9,12 +9,13 @@ namespace SecretSantaWeb.Models
     {
         public int ExclusionID { get; set; }
 
+        public int OwnerID { get; set; }
+
+        public virtual Person Owner { get; set; }
+
         public int NotBuyingForID { get; set; }
 
         public virtual Person NotBuyingFor { get; set; }
 
-        public int OwnerID { get; set; }
-
-        public virtual Person Owner { get; set; }
     }
 }

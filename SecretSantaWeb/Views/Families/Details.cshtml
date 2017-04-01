@@ -32,5 +32,6 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.FamilyID }) |
+    @Html.ActionLink("Add Member", "AddToFamily", "People", new { familyID = Model.FamilyID }, null) |
     @Html.ActionLink("Back to List", "Index")
 </p>

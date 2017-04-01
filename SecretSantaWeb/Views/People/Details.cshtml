@@ -41,5 +41,6 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.PersonID }) |
+    @Html.ActionLink("Add Exclusion", "AddToPerson", "Exclusions", new { personID = Model.PersonID }, null) |
     @Html.ActionLink("Back to List", "Index")
 </p>

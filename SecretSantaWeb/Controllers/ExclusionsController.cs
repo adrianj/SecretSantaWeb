@@ -54,7 +54,47 @@ namespace SecretSantaWeb.Controllers
             {
                 exclusion.NotBuyingFor = db.People.Find(exclusion.NotBuyingForID);
                 exclusion.Owner = db.People.Find(exclusion.OwnerID);
-                if(exclusion.Owner == null)
+                if (exclusion.Owner == null)
+                {
+                    return HttpNotFound();
+                }
+                exclusion.Owner.Exclusions.Add(exclusion);
+                db.Exclusions.Add(exclusion);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.OwnerID = new SelectList(db.People, "PersonID", "Name", exclusion.OwnerID);
+            ViewBag.NotBuyingForID = new SelectList(db.People, "PersonID", "Name", exclusion.NotBuyingForID);
+            return View(exclusion);
+        }
+
+        // GET: Exclusions/AddToPerson/5
+        public ActionResult AddToPerson(int? personID)
+        {
+            if (personID == null)
+                return RedirectToAction("Create");
+            Person person = db.People.Find(personID);
+            if (person == null)
+                return HttpNotFound();
+            Exclusion e = new Exclusion() { OwnerID = person.PersonID, Owner = person, };
+            ViewBag.OwnerID = new SelectList(db.People.Select(p => p.PersonID == personID), "PersonID", "Name");
+            ViewBag.NotBuyingForID = new SelectList(db.People, "PersonID", "Name");
+            return View(e);
+        }
+
+        // POST: Exclusions/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddToPerson([Bind(Include = "ExclusionID,NotBuyingForID,OwnerID")] Exclusion exclusion)
+        {
+            if (ModelState.IsValid)
+            {
+                exclusion.NotBuyingFor = db.People.Find(exclusion.NotBuyingForID);
+                exclusion.Owner = db.People.Find(exclusion.OwnerID);
+                if (exclusion.Owner == null)
                 {
                     return HttpNotFound();
                 }
