@@ -27,6 +27,8 @@ namespace SecretSantaWeb.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<Exclusion>().HasKey(e => new { e.OwnerID, e.NotBuyingForID });
+
             modelBuilder.Entity<Person>()
                 .HasMany(p => p.Exclusions)
                 .WithRequired(e => e.Owner)
@@ -39,5 +41,6 @@ namespace SecretSantaWeb.Models
                 .HasForeignKey(e => e.NotBuyingForID)
                 .WillCascadeOnDelete(true);
         }
+        
     }
 }

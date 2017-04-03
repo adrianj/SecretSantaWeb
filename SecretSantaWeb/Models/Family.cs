@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -11,8 +12,7 @@ namespace SecretSantaWeb.Models
         public string FamilyName { get; set; }
 
         public virtual List<Person> FamilyMembers { get; set; }
-
-        public virtual List<Mapping> Mappings { get; set; }
+        
 
     }
 }
