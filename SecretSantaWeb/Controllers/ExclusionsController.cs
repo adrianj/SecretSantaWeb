@@ -77,13 +77,13 @@ namespace SecretSantaWeb.Controllers
             Person person = db.People.Find(personID);
             if (person == null)
                 return HttpNotFound();
-            Exclusion e = new Exclusion() { OwnerID = person.PersonID, Owner = person, };
-            ViewBag.OwnerID = new SelectList(db.People.Select(p => p.PersonID == personID), "PersonID", "Name");
-            ViewBag.NotBuyingForID = new SelectList(db.People, "PersonID", "Name");
+            Exclusion e = new Exclusion() { OwnerID = person.PersonID, Owner = person };
+            ViewBag.OwnerID = new SelectList(db.People.Where(p => p.Name == person.Name), "PersonID", "Name", person.Name);
+            ViewBag.NotBuyingForID = new SelectList(db.People.Where(p => p.FamilyID == person.FamilyID), "PersonID", "Name");
             return View(e);
         }
 
-        // POST: Exclusions/Create
+        // POST: Exclusions/AddToPerson/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]

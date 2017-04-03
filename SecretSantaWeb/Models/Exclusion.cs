@@ -15,7 +15,7 @@ namespace SecretSantaWeb.Models
 
         public virtual Person Owner { get; set; }
         
-        public int NotBuyingForID { get; set; }
+        public int? NotBuyingForID { get; set; }
 
         public virtual Person NotBuyingFor { get; set; }
 

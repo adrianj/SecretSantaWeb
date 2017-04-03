@@ -27,16 +27,21 @@
         <dt>
             Not buying for
         </dt>
-        <dd></dd>
+        <dd>
 
         @foreach (var item in Model.Exclusions)
         {
-            <dt></dt>
-            <dd>
-               
+
                 @Html.ActionLink(item.NotBuyingFor.Name, "Details", "Exclusions", new { id = item.ExclusionID }, null)
+
+          }
             </dd>
-        }
+        <dt>
+            @Html.DisplayNameFor(model => model.BuyingFor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BuyingFor)
+        </dd>
     </dl>
 </div>
 <p>

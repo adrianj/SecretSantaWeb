@@ -16,12 +16,8 @@ namespace SecretSantaWeb.Models
         public int FamilyID { get; set; }
         public virtual Family Family { get; set; }
         
-        [Key]
-        [ForeignKey("OwnerID")]
         public virtual List<Exclusion> Exclusions { get; set; }
-
-        [Key]
-        [ForeignKey("NotBuyingForID")]
+        
         public virtual List<Exclusion> NotBuyingFor { get; set; }
 
         public int? BuyingFor { get; set; }
