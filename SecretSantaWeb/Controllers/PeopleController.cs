@@ -61,6 +61,37 @@ namespace SecretSantaWeb.Controllers
             return View(person);
         }
 
+        // Get: People/AddToFamily/1
+        public ActionResult AddToFamily(int ?familyID)
+        {
+            if (familyID == null)
+                return RedirectToAction("Create");
+            Family family = db.Families.Find(familyID);
+            if (family == null)
+                return HttpNotFound();
+            Person p = new Person() { FamilyID = family.FamilyID, Family = family,  };
+            ViewBag.FamilyID = new SelectList(db.Families, "FamilyID", "FamilyName");
+            return View(p);
+        }
+
+        // POST: People/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddToFamily([Bind(Include = "PersonID,Name,FamilyID")] Person person)
+        {
+            if (ModelState.IsValid)
+            {
+                db.People.Add(person);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.FamilyID = new SelectList(db.Families, "FamilyID", "FamilyName", person.FamilyID);
+            return View(person);
+        }
+
         // GET: People/Edit/5
         public ActionResult Edit(int? id)
         {

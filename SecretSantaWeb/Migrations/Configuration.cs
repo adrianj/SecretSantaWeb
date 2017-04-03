@@ -11,11 +11,11 @@ namespace SecretSantaWeb.Migrations
         {
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;
-            ContextKey = "SecretSantaWeb.Models.SecretSantaWebContext";
         }
 
         protected override void Seed(SecretSantaWeb.Models.SecretSantaWebContext context)
         {
+            Models.DatabaseSeeder.Seed(context);
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

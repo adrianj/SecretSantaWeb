@@ -14,7 +14,7 @@ namespace SecretSantaWeb.Models
         // automatically whenever you change your model schema, please use data migrations.
         // For more information refer to the documentation:
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
-    
+
         public SecretSantaWebContext() : base("name=SecretSantaWebContext")
         {
         }
@@ -24,5 +24,39 @@ namespace SecretSantaWeb.Models
         public System.Data.Entity.DbSet<SecretSantaWeb.Models.Person> People { get; set; }
 
         public System.Data.Entity.DbSet<SecretSantaWeb.Models.Exclusion> Exclusions { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Family>()
+                .HasMany(f => f.FamilyMembers)
+                .WithRequired(p => p.Family)
+                .HasForeignKey(p => p.FamilyID)
+                .WillCascadeOnDelete(true);
+            /*
+            modelBuilder.Entity<Person>()
+                .HasMany(p => p.Exclusions)
+                .WithRequired(e => e.Owner)
+                .HasForeignKey(e => e.OwnerID)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Person>()
+                .HasMany(p => p.Exclusions)
+                .WithRequired(e => e.NotBuyingFor)
+                .HasForeignKey(e => e.NotBuyingForID)
+                .WillCascadeOnDelete(true);
+                */
+            modelBuilder.Entity<Exclusion>()
+                .HasRequired(e => e.Owner)
+                .WithMany(p => p.Exclusions)
+                .HasForeignKey(e => e.OwnerID)
+                .WillCascadeOnDelete(true);
+            /*
+            modelBuilder.Entity<Exclusion>()
+                .HasOptional(e => e.NotBuyingFor)
+                .WithMany(p => p.NotBuyingFor)
+                .HasForeignKey(e => e.NotBuyingForID)
+                .WillCascadeOnDelete(false);*/
+        }
+        
     }
 }

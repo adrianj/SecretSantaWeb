@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Create Exclusion</h2>
 
 
 @using (Html.BeginForm()) 
@@ -14,6 +14,7 @@
     <div class="form-horizontal">
         <h4>Exclusion</h4>
         <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.OwnerID, "OwnerID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -22,7 +23,6 @@
             </div>
         </div>
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.NotBuyingForID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

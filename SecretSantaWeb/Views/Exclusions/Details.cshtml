@@ -4,26 +4,25 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Exclusion Details</h2>
 
 <div>
-    <h4>Exclusion</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.NotBuyingForID)
+            @Html.DisplayNameFor(model => model.Owner)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.NotBuyingForID)
+            @Html.ActionLink(Model.Owner.Name, "Details","People",new { id = Model.OwnerID }, null)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.OwnerID)
+            @Html.DisplayNameFor(model => model.NotBuyingFor)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.OwnerID)
+            @Html.ActionLink(Model.NotBuyingFor.Name, "Details", "People", new { id = Model.NotBuyingForID }, null)
         </dd>
 
     </dl>

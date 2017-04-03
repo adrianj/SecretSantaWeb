@@ -4,10 +4,9 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Family Details</h2>
 
 <div>
-    <h4>Family</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -17,10 +16,27 @@
         <dd>
             @Html.DisplayFor(model => model.FamilyName)
         </dd>
-
+        
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.FamilyID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+    <h4>Family Members</h4>
+    <table class="table">
+    
+            @foreach (var item in Model.FamilyMembers)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.Name, "Details", "People", new { id = item.PersonID }, null)
+                    </td>
+                </tr>
+            }
+   
+</table>
+<hr />
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.FamilyID }) |
+        @Html.ActionLink("Add Member", "AddToFamily", "People", new { familyID = Model.FamilyID }, null) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
