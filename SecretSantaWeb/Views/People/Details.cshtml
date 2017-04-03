@@ -25,22 +25,16 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
         <dt>
-            Not buying for
+            @Html.DisplayNameFor(model => model.NotBuyingFor)
         </dt>
         <dd>
-
-        @foreach (var item in Model.Exclusions)
-        {
-
-                @Html.ActionLink(item.NotBuyingFor.Name, "Details", "Exclusions", new { id = item.ExclusionID }, null)
-
-          }
-            </dd>
+            @(Model.NotBuyingFor == null ? Html.ActionLink("<Blank. Click to set>", "SetNotBuying", "People") : Html.ActionLink(Model.NotBuyingFor.Name, "Details", "People", new { id = Model.NotBuyingForID }, null))
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.BuyingFor)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.BuyingFor)
+            @(Model.BuyingFor == null ? Html.ActionLink("<Blank. Click to set>", "SetBuying", "People") : Html.ActionLink(Model.BuyingFor.Name, "Details", "People", new { id = Model.BuyingForID }, null))
         </dd>
     </dl>
 </div>

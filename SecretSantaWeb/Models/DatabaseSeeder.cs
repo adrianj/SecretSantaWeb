@@ -11,24 +11,58 @@ namespace SecretSantaWeb.Models
     {
         public static void Seed(SecretSantaWeb.Models.SecretSantaWebContext context)
         {
-            context.Families.AddOrUpdate(
-                f => f.FamilyName,
-                new Family() { FamilyID = 1, FamilyName = "Jongenelen" },
-                new Family() { FamilyID = 2, FamilyName = "Vanstone" }
-                );
+            
+            var families = new List<Family>
+            {
+                new Family() { FamilyName = "Jongenelen" },
+                new Family() { FamilyName = "Vanstone" },
+                new Family() { FamilyName = "Smith" }
+            };
+            families.ForEach(f => context.Families.AddOrUpdate(p => p.FamilyName, f));
+            context.SaveChanges();
 
-            context.People.AddOrUpdate(
-                p => p.Name,
-                new Person() { PersonID = 1, Name = "Adrian", FamilyID = 1}, 
-                new Person() { PersonID = 2, Name = "Claire", FamilyID = 1 }, 
-                new Person() { PersonID = 3, Name = "Arjen", FamilyID = 1 }, 
-                new Person() { PersonID = 4, Name = "Jeff", FamilyID = 2 }
-                );
+            var jongenelen = context.Families.SingleOrDefault(f => f.FamilyName == "Jongenelen");
+            var vanstone = context.Families.SingleOrDefault(f => f.FamilyName == "Vanstone");
 
-            context.Exclusions.AddOrUpdate(
-                e => e.OwnerID,
-                new Exclusion() {  ExclusionID = 1, OwnerID = 1, NotBuyingForID = 1}
-                );
+            var people = new List<Person>
+            {
+                new Person() {  Name = "Adrian", FamilyID = jongenelen.FamilyID },
+                new Person() {  Name = "Claire",FamilyID = jongenelen.FamilyID },
+                new Person() {  Name = "Arjen",FamilyID = jongenelen.FamilyID},
+                new Person() {  Name = "Jeff",FamilyID = vanstone.FamilyID},
+                new Person() {  Name = "Arjen",FamilyID = vanstone.FamilyID},
+            };
+
+            people.ForEach(per => context.People.AddOrUpdate(p => p.Name, per));
+            context.SaveChanges();
+
+            AddBuyingFor(context, "Adrian", "Jongenelen", "Claire", "Jongenelen");
+            AddNotBuyingFor(context, "Adrian", "Jongenelen", "Arjen", "Jongenelen");
+
+            AddBuyingFor(context, "Claire", "Jongenelen", "Arjen", "Jongenelen");
+            AddNotBuyingFor(context, "Claire", "Jongenelen", "Adrian", "Jongenelen");
+
+            AddBuyingFor(context, "Arjen", "Vanstone", "Jeff", "Vanstone");
+
+            context.SaveChanges();
+
         }
+
+        static void AddBuyingFor(SecretSantaWebContext context, string buyerFirstName, string buyerFamilyName, string receiverFirstName, string receiverFamilyName)
+        {
+            var buyer = context.People.SingleOrDefault(p => p.Name == buyerFirstName && p.Family.FamilyName == buyerFamilyName);
+            var receiver = context.People.SingleOrDefault(p => p.Name == receiverFirstName && p.Family.FamilyName == receiverFamilyName);
+            buyer.BuyingFor = receiver;
+            buyer.BuyingForID = receiver.PersonID;
+        }
+
+        static void AddNotBuyingFor(SecretSantaWebContext context, string buyerFirstName, string buyerFamilyName, string receiverFirstName, string receiverFamilyName)
+        {
+            var buyer = context.People.SingleOrDefault(p => p.Name == buyerFirstName && p.Family.FamilyName == buyerFamilyName);
+            var receiver = context.People.SingleOrDefault(p => p.Name == receiverFirstName && p.Family.FamilyName == receiverFamilyName);
+            buyer.NotBuyingFor = receiver;
+            buyer.NotBuyingForID = receiver.PersonID;
+        }
+
     }
 }

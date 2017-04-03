@@ -12,17 +12,18 @@ namespace SecretSantaWeb.Models
         public int PersonID { get; set; }
 
         public string Name { get; set; }
-        
+
         public int FamilyID { get; set; }
         public virtual Family Family { get; set; }
-        
-        public virtual List<Exclusion> Exclusions { get; set; }
-        
-        public virtual List<Exclusion> NotBuyingFor { get; set; }
 
-        public int? BuyingFor { get; set; }
+        public int? NotBuyingForID { get; set; }
+        public virtual Person NotBuyingFor { get; set; }
 
+        public int? BuyingForID { get; set; }
+        public virtual Person BuyingFor { get; set; }
 
+    }
+    
         /*
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -39,5 +40,5 @@ namespace SecretSantaWeb.Models
                 .WillCascadeOnDelete(true);
         }*/
 
-    }
+    
 }
