@@ -7,6 +7,8 @@
 <h2>Person Details</h2>
 
 <div>
+    @Html.HiddenFor(model => model.BuyingFor)
+    @Html.HiddenFor(model => model.NotBuyingFor)
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -21,21 +23,34 @@
             @Html.DisplayNameFor(model => model.Name)
         </dt>
 
+
+
         <dd>
             @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NotBuyingFor)
-        </dt>
-        <dd>
-            @(Model.NotBuyingFor == null ? Html.ActionLink("<Blank. Click to set>", "SetNotBuying", "People") : Html.ActionLink(Model.NotBuyingFor.Name, "Details", "People", new { id = Model.NotBuyingForID }, null))
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.BuyingFor)
         </dt>
         <dd>
-            @(Model.BuyingFor == null ? Html.ActionLink("<Blank. Click to set>", "SetBuying", "People") : Html.ActionLink(Model.BuyingFor.Name, "Details", "People", new { id = Model.BuyingForID }, null))
+            @(
+            Model.BuyingForID == null
+            ? Html.Raw("[Empty]")
+            : Html.ActionLink(Model.BuyingFor.Name, "Details", "People", new { id = Model.BuyingForID }, null)
+            )
         </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NotBuyingFor)
+        </dt>
+        <dd>
+            @(
+        Model.NotBuyingForID == null
+        ? Html.Raw("[Empty]")
+        : Html.ActionLink(Model.NotBuyingFor.Name, "Details", "People", new { id = Model.NotBuyingForID }, null)
+            )
+        </dd>
+        
     </dl>
 </div>
 <p>

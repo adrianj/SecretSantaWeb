@@ -46,7 +46,7 @@ namespace SecretSantaWeb.Models
 
             modelBuilder.Entity<Person>()
                 .HasOptional(p => p.NotBuyingFor)
-                .WithOptionalDependent();
+                .WithOptionalPrincipal();
             /*
             
             modelBuilder.Entity<Person>()

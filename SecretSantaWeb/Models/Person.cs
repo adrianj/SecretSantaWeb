@@ -22,6 +22,8 @@ namespace SecretSantaWeb.Models
         public int? BuyingForID { get; set; }
         public virtual Person BuyingFor { get; set; }
 
+
+
     }
     
         /*

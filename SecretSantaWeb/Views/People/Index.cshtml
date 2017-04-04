@@ -15,10 +15,10 @@
             @Html.DisplayNameFor(model => model.PersonID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Family.FamilyName)
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Family.FamilyName)
         </th>
         <th></th>
     </tr>
@@ -29,10 +29,10 @@
             @Html.DisplayFor(modelItem => item.PersonID)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Family.FamilyName)
+            @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.DisplayFor(modelItem => item.Family.FamilyName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.PersonID }) |
