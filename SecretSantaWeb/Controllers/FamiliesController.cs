@@ -33,6 +33,7 @@ namespace SecretSantaWeb.Controllers
             }
             SecretSantaCalculator cal = new SecretSantaCalculator(db, family);
             cal.Calculate();
+            cal.UpdateDatabase(db);
             return RedirectToAction("Details",new { id = id });
         }
 
