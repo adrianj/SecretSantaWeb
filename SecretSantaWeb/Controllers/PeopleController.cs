@@ -33,7 +33,7 @@ namespace SecretSantaWeb.Controllers
             {
                 return HttpNotFound();
             }
-            CheckPersonModel(person);
+            CheckPersonModel(db,person);
             return View(person);
         }
 
@@ -213,7 +213,7 @@ namespace SecretSantaWeb.Controllers
             base.Dispose(disposing);
         }
 
-        void CheckPersonModel(Person model)
+        public static void CheckPersonModel(SecretSantaWebContext db, Person model)
         {
             if (model.NotBuyingForID == null)
                 model.NotBuyingFor = null;

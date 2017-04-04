@@ -1,42 +1,42 @@
 ﻿@model SecretSantaWeb.Models.Family
-
 @{
     ViewBag.Title = "Details";
 }
-
 <h2>Family Details</h2>
-
 <div>
     <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.FamilyName)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.FamilyName)
         </dd>
-        
+
     </dl>
 </div>
 
-    <h4>Family Members</h4>
-    <table class="table">
-    
-            @foreach (var item in Model.FamilyMembers)
+<h4>Family Members</h4>
+<table class="table">
+
+    @foreach (var item in Model.FamilyMembers)
             {
-                <tr>
-                    <td>
-                        @Html.ActionLink(item.Name, "Details", "People", new { id = item.PersonID }, null)
-                    </td>
-                </tr>
-            }
-   
+        <tr>
+            <td>
+                @Html.ActionLink(item.Name, "Details", "People", new { id = item.PersonID }, null)
+            </td>
+        </tr>
+    }
+
 </table>
+    <div>
+        <input type="button" value="Do Secret Santa Thing!" class="btn btn-default" onclick="location.href='@Url.Action("Calculate", "Families", new { id = Model.FamilyID }, null)'">
+    </div>
+
 <hr />
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.FamilyID }) |
-        @Html.ActionLink("Add Member", "AddToFamily", "People", new { familyID = Model.FamilyID }, null) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.FamilyID }) |
+    @Html.ActionLink("Add Member", "AddToFamily", "People", new { familyID = Model.FamilyID }, null) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
 

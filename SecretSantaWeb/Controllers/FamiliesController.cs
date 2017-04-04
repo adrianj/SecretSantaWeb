@@ -20,6 +20,22 @@ namespace SecretSantaWeb.Controllers
             return View(db.Families.ToList());
         }
 
+        public ActionResult Calculate(int ?id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Family family = db.Families.Find(id);
+            if (family == null)
+            {
+                return HttpNotFound();
+            }
+            SecretSantaCalculator cal = new SecretSantaCalculator(db, family);
+            cal.Calculate();
+            return RedirectToAction("Details",new { id = id });
+        }
+
         // GET: Families/Details/5
         public ActionResult Details(int? id)
         {
