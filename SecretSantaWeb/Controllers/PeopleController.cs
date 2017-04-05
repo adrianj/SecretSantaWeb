@@ -187,9 +187,15 @@ namespace SecretSantaWeb.Controllers
             if (buyingID == null || buyingID <= 0)
             {
                 if (isBuyingFor)
-                {  toUpdate.BuyingForID = null; toUpdate.BuyingFor = null; }
+                {
+                    toUpdate.BuyingForID = null;
+                    //toUpdate.BuyingFor = null;
+                }
                 else
-                { toUpdate.NotBuyingForID = null; toUpdate.NotBuyingFor = null; }
+                {
+                    toUpdate.NotBuyingForID = null;
+                    //toUpdate.NotBuyingFor = null;
+                }
             }
             else
             {
@@ -197,9 +203,15 @@ namespace SecretSantaWeb.Controllers
                 if (other == null)
                     return false;
                 if (isBuyingFor)
-                { toUpdate.BuyingForID = other.PersonID; toUpdate.BuyingFor = other; }
+                {
+                    toUpdate.BuyingForID = other.PersonID;
+                    //toUpdate.BuyingFor = other;
+                }
                 else
-                { toUpdate.NotBuyingForID = other.PersonID; toUpdate.NotBuyingFor = other; }
+                {
+                    toUpdate.NotBuyingForID = other.PersonID;
+                    //toUpdate.NotBuyingFor = other;
+                }
             }
             return true;
         }
